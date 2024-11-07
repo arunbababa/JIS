@@ -15,7 +15,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14'  # 使用するNode.jsのバージョン
+          node-version: '20'  # 使用するNode.jsのバージョン
 
       - name: Install dependencies
         run: npm install
