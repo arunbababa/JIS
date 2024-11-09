@@ -1,9 +1,9 @@
-name: Deploy React App
+name: Deploy React App to Firebase
 
 on:
-  push:
+  push: # トリガーとなるアクションを設定
     branches:
-      - dev1  # プッシュをトリガーにするブランチ
+      - dev1  # トリガーとなるブランチを設定
 
 jobs:
   deploy:
@@ -17,14 +17,17 @@ jobs:
         with:
           node-version: '20'  # 使用するNode.jsのバージョン
 
-      - name: Install make
-        run: sudo apt-get install make  # makeコマンドのインストール
-
       - name: Install dependencies
         run: npm install  # プロジェクトの依存関係をインストール
 
-      - name: Install Firebase CLI
-        run: npm install -g firebase-tools  # Firebase CLIのインストール
+      - name: Run build 
+        run: npm run build
+        env:
+            VITE_SUPABASE_URL: ${{secrets.SUPABASE_URL}}
+            VITE_SUPABASE_ANON_KEY: ${{secrets.SUPABASE_ANON_KEY}}
 
-      - name: Build and Deploy
-        run: make deploy  # Makefileのdeployターゲットを実行
+      - name: Install Firebase CLI
+        run: npm install -g firebase-tools  # Firebase CLIのインストール、ここも変えたほうが良いかな？
+
+      - name: Deploy to firebase
+        run: 	firebase deploy --token 1//0ew7AvenpfRAuCgYIARAAGA4SNwF-L9IrejjgEbs2zO02r1WRstxihD4F4Q6HvTMYWFi54y2JaO-ZEf2ruKp0gpykjxDEVlZxyII

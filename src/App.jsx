@@ -58,8 +58,10 @@ function App() {
       setTodos(updatedTodos);  // 最新のデータで画面を更新
     };
 
+
+    // a
   return (
-    <>
+    <> 
       <InputRecord
         title={title}
         time={time}
