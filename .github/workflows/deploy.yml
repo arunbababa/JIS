@@ -23,8 +23,8 @@ jobs:
       - name: Run build 
         run: npm run build
         env:
-            VITE_SUPABASE_URL: ${{secrets.SUPABASE_URL}}
-            VITE_SUPABASE_ANON_KEY: ${{secrets.SUPABASE_ANON_KEY}}
+            VITE_SUPABASE_URL: ${{.env.SUPABASE_URL}}
+            VITE_SUPABASE_ANON_KEY: ${{.env.SUPABASE_ANON_KEY}}
 
       - name: Install Firebase CLI
         run: npm install -g firebase-tools  # Firebase CLIのインストール、ここも変えたほうが良いかな？
