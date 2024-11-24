@@ -1,9 +1,9 @@
 name: Deploy React App to Firebase
 
 on:
-  push: # トリガーとなるアクションを設定
+  push:
     branches:
-      - dev1  # トリガーとなるブランチを設定
+      - dev1
 
 jobs:
   deploy:
@@ -15,7 +15,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '20'  # 使用するNode.jsのバージョン
+          node-version: '20'
 
       - name: Install dependencies
         run: npm install  # プロジェクトの依存関係をインストール
@@ -27,7 +27,7 @@ jobs:
             VITE_SUPABASE_ANON_KEY: ${{secrets.VITE_SUPABASE_ANON_KEY}}
 
       - name: Install Firebase CLI
-        run: npm install -g firebase-tools  # Firebase CLIのインストール、ここも変えたほうが良いかな？
+        run: npm install -g firebase-tools
 
       - name: Deploy to firebase
         run: 	firebase deploy --token ${{ secrets.FIREBASE_TOKEN }}

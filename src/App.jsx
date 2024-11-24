@@ -8,17 +8,13 @@ function App() {
   // フックたち
   const [title, setTitle] = useState(""); //【学習内容】のフォームをフック
   const [time, setTime] = useState(0); //【学習時間】のフォームをフック
-  const [records, setRecords] = useState([]); // 【登録した内容】をフック 配列であるべき
   const [error, setError] = useState("");
-  const [times, setTimes] = useState([]);
-
   const [todos,setTodos] = useState([]);
 
   useEffect(() => {
     const getTodos= async() => {
       const todos = await getAllTodos();
       setTodos(todos);
-      console.log(todos);
     };
     getTodos();
   },[]);
@@ -38,7 +34,6 @@ function App() {
 
     // Supabase にタスクを追加
     const newTodo = await addTodo(title, time);
-    console.log("newTodoの内容:", newTodo);  // newTodoの内容を確認
     
     // Supabaseから最新データを再取得してtodosを更新
     const updatedTodos = await getAllTodos();
@@ -62,6 +57,8 @@ function App() {
     // a
   return (
     <> 
+      <title data-testid="title">学習管理アプリ</title>
+      {error && <p data-testid="error-message" style={{ color: "red" }}>{error}</p>} {/* エラーメッセージの表示 */}
       <InputRecord
         title={title}
         time={time}
